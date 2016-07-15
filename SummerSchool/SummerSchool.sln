@@ -5,19 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicWpfMVVM", "BasicWpfMVVM\BasicWpfMVVM.csproj", "{DA86ADC5-D229-4E72-A548-415484A517AB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{25332D73-AD6F-4DAF-A153-96FD2331B628}"
-	ProjectSection(SolutionItems) = preProject
-		Images\jt6_0floor.png = Images\jt6_0floor.png
-		Images\jt6_1stfloor.png = Images\jt6_1stfloor.png
-		Images\jt6_2ndfloor.png = Images\jt6_2ndfloor.png
-		Images\jt6_3rdfloor.png = Images\jt6_3rdfloor.png
-		Images\jt6_4thfloor.png = Images\jt6_4thfloor.png
-		Images\jt6_5hfloor.png = Images\jt6_5hfloor.png
-		Images\jt8_3rdfloor.png = Images\jt8_3rdfloor.png
-		Images\jt8_commonfloors.png = Images\jt8_commonfloors.png
-		Images\priecelie.png = Images\priecelie.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
