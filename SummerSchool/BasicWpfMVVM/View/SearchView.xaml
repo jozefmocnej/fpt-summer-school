@@ -1,0 +1,106 @@
+﻿<base:UserControlBase x:Class="BasicWpfMVVM.View.SearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:base="clr-namespace:BasicWpfMVVM.Base"
+             xmlns:vm="clr-namespace:BasicWpfMVVM"
+             xmlns:res="clr-namespace:BasicWpfMVVM.Resources.Strings"  
+             mc:Ignorable="d" 
+             DataContext="{Binding SearchViewModel, Source={StaticResource container}}"
+             FontSize="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Grid.Row="0" HorizontalAlignment="Left"  
+                Style="{StaticResource ResourceKey=HomeButtonStyle}" x:Name="home">
+                <Image Source="{StaticResource HomeImage}"/>
+            </Button>
+            <Button Grid.Row="0" HorizontalAlignment="Left"  
+                Style="{StaticResource ResourceKey=BackButtonStyle}" x:Name="back">
+                <Image Source="{StaticResource BackImage}"/>
+            </Button>
+        </StackPanel>
+        <Label Content="{x:Static res:Resource.Search}" Grid.Row="1" Style="{StaticResource ResourceKey=H1Style}"/>
+        <!--<Grid Grid.Row="2">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="47*"/>
+                    <ColumnDefinition Width="353*"/>
+                    <ColumnDefinition Width="400*"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Grid.Column="0" Header="Room" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Style="{StaticResource ResourceKey=LabelControlStyle}">Building</Label>
+                        <TextBox Grid.Column="1"></TextBox>
+                        <Label Grid.Column="2" Style="{StaticResource ResourceKey=LabelControlStyle}">Room</Label>
+                        <TextBox Grid.Column="3"></TextBox>
+                        <Button Grid.Column="4" HorizontalAlignment="Left" Margin="40 0 0 0" Command="{Binding SearchRoom}">Search</Button>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="2" Header="Person" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Style="{StaticResource ResourceKey=LabelControlStyle}">Firstname</Label>
+                        <TextBox Grid.Column="1"></TextBox>
+                        <Label Grid.Column="2" Style="{StaticResource ResourceKey=LabelControlStyle}">Lastname</Label>
+                        <TextBox Grid.Column="3"></TextBox>
+                        <Button Grid.Column="4" Style="{StaticResource ResourceKey=SearchControlBtnStyle}" Command="{Binding SearchPerson}" >Search</Button>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>-->
+        <GroupBox Header="Search Bar" Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+
+                <Label Content="{x:Static res:Resource.Building}" Style="{StaticResource ResourceKey=LabelControlStyle}" />
+                <ComboBox Width="100" DisplayMemberPath="IdBuilding" ItemsSource="{Binding BuildingsComboBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedBuilding}"></ComboBox>
+                <Label Content="{x:Static res:Resource.Floor}" Style="{StaticResource ResourceKey=LabelControlStyle}"/>
+                <ComboBox Width="100" DisplayMemberPath="IdFloor" ItemsSource="{Binding FloorsComboBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedFloor}"></ComboBox>
+                <Label Content="{x:Static res:Resource.Room}" Style="{StaticResource ResourceKey=LabelControlStyle}"/>
+                <ComboBox Width="100" DisplayMemberPath="IdRoom" ItemsSource="{Binding RoomsComboBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedRoom}"></ComboBox>
+                <Label Content="{x:Static res:Resource.FirstName}" Grid.Column="0" Style="{StaticResource ResourceKey=LabelControlStyle}"/>
+                <TextBox Width="150" VerticalContentAlignment="Center"  Text="{Binding FirstNameTextBox, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"></TextBox>
+                <Label Content="{x:Static res:Resource.LastName}" Style="{StaticResource ResourceKey=LabelControlStyle}"/>
+                <TextBox Width="150" VerticalContentAlignment="Center" Text="{Binding LastNameTextBox, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"></TextBox>
+                <Button MinWidth ="100" Padding="10 0" Content="{x:Static res:Resource.Search}" Style="{StaticResource ResourceKey=SearchControlBtnStyle}" Command="{Binding SearchPerson}"/>
+            </StackPanel>
+        </GroupBox>
+        <DataGrid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="RoomsCollectionGrid"  AutoGenerateColumns="False"
+                  ItemsSource="{Binding PersonsCollection, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.FirstName}" IsReadOnly="True" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.LastName}" IsReadOnly="True" Binding="{Binding LastName}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.Building}" IsReadOnly="True" Binding="{Binding IdBuilding}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.Floor}" IsReadOnly="True" Binding="{Binding IdFloor}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.Room}" IsReadOnly="True" Binding="{Binding IdRoom}"/>-->
+
+                
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.FirstName}" IsReadOnly="True" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.LastName}" IsReadOnly="True" Binding="{Binding LastName}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.Building}" IsReadOnly="True" Binding="{Binding IdBuilding}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.Floor}" IsReadOnly="True" Binding="{Binding IdFloor}"/>
+                <DataGridTextColumn MinWidth="150" Header="{x:Static res:Resource.Room}" IsReadOnly="True" Binding="{Binding IdRoom}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</base:UserControlBase>

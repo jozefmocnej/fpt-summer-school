@@ -1,0 +1,78 @@
+﻿<base:UserControlBase x:Class="BasicWpfMVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:base="clr-namespace:BasicWpfMVVM.Base"
+             xmlns:vm="clr-namespace:BasicWpfMVVM"
+             xmlns:res="clr-namespace:BasicWpfMVVM.Resources.Strings"        
+             mc:Ignorable="d" 
+             DataContext="{Binding HomeViewModel, Source={StaticResource container}}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource FptBuildingImage}" Opacity="0.6"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="2"  Style="{StaticResource timestyle}" Text="{Binding CurrentDateTime}"/>
+        
+        <TextBlock Grid.Row ="0" Grid.Column="0"  Text="{x:Static res:Resource.Welcome}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" FontStyle="Italic" FontWeight="Bold" Foreground="#04AEDA" Width="282"/>
+        <Image     Grid.Row ="0" Grid.Column="1" Source="{StaticResource CompanyLogoImage}" Height="77"  HorizontalAlignment="Center" Margin="194,10,298,13" Visibility="Hidden"/>
+        <StackPanel Grid.Row ="0" Grid.Column="2" Orientation="Horizontal">
+        <Button    Grid.Row ="0" Grid.Column="2" HorizontalAlignment="Right" CommandParameter="EN" 
+                   Style="{StaticResource ResourceKey=languageStyle}" 
+                   x:Name="english" Command="{Binding changeLanguage}">
+            <Image Source="{StaticResource English}"  />
+        </Button>
+        <Button    Grid.Row ="0" Grid.Column="3" HorizontalAlignment="Right" x:Name="slovak" CommandParameter="SK" 
+                   Style="{StaticResource ResourceKey=languageStyle}" 
+                   Command="{Binding changeLanguage}">
+            <Image Source="{StaticResource Slovak}" Width="60"/>
+        </Button>
+        </StackPanel>
+
+
+
+
+
+        <StackPanel Grid.Row="1"  Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+            <Button  HorizontalAlignment="Center" Command="{Binding GoToNavigation}" 
+                    Style="{StaticResource ResourceKey=HomeViewButtonStyle}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static res:Resource.Navigation}" HorizontalAlignment="Center" Foreground="#04AEDA" FontWeight="Bold"/>
+                    <Image Source="{StaticResource NavigationImage}" Height="259" Width="238"/>
+                </StackPanel>
+
+            </Button>
+
+            <Button  HorizontalAlignment="Center" Command="{Binding GoToSearch}"
+                    Style="{StaticResource ResourceKey=HomeViewButtonStyle}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static res:Resource.Search}"  HorizontalAlignment="Center"  Foreground="#04AEDA" FontWeight="Bold"/>
+                    <Image Source="{StaticResource SearchImage}" Height="259" Width="238"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button 
+                Style="{StaticResource ResourceKey=languageStyle}" x:Name="back" Command="{Binding GoToStatistic}" >
+            <Image Source="{StaticResource Statistic2}"/>
+        </Button>
+        <Button 
+                Style="{StaticResource ResourceKey=languageStyle}" x:Name="Info" Command="{Binding GoToInfo}" >
+            <Image Source="{StaticResource InfoImage}"/>
+        </Button>
+        </StackPanel>
+    </Grid>
+</base:UserControlBase>

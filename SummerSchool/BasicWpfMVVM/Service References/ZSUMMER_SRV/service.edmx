@@ -1,0 +1,105 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="ZSUMMER_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="Building" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="IdBuilding" />
+        </Key>
+        <Property Name="IdBuilding" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <NavigationProperty Name="ToFloorSet" Relationship="ZSUMMER_SRV.Building2Floor" FromRole="FromRole_Building2Floor" ToRole="ToRole_Building2Floor" />
+      </EntityType>
+      <EntityType Name="Room" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="IdRoom" />
+        </Key>
+        <Property Name="IdRoom" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="IdBuilding" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Occupied" Type="Edm.Int16" Nullable="false" sap:label="Occupied" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="IdFloor" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Capacity" Type="Edm.Int16" Nullable="false" sap:label="Int2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <NavigationProperty Name="ToPersonSet" Relationship="ZSUMMER_SRV.Room2Person" FromRole="FromRole_Room2Person" ToRole="ToRole_Room2Person" />
+      </EntityType>
+      <EntityType Name="Floor" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="IdFloor" />
+        </Key>
+        <Property Name="IdFloor" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="IdBuilding" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <NavigationProperty Name="ToRoomSet" Relationship="ZSUMMER_SRV.Floor2Room" FromRole="FromRole_Floor2Room" ToRole="ToRole_Floor2Room" />
+      </EntityType>
+      <EntityType Name="Person" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="IdPerson" />
+        </Key>
+        <Property Name="IdBuilding" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" />
+        <Property Name="IdPerson" Type="Edm.Int32" Nullable="false" sap:label="Number" />
+        <Property Name="IdFloor" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" />
+        <Property Name="IdRoom" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field Length = 10" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Character field, length 32" />
+        <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Character field, length 32" />
+      </EntityType>
+      <Association Name="Room2Person" sap:content-version="1">
+        <End Type="ZSUMMER_SRV.Room" Multiplicity="1" Role="FromRole_Room2Person" />
+        <End Type="ZSUMMER_SRV.Person" Multiplicity="*" Role="ToRole_Room2Person" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Room2Person">
+            <PropertyRef Name="IdRoom" />
+          </Principal>
+          <Dependent Role="ToRole_Room2Person">
+            <PropertyRef Name="IdRoom" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Floor2Room" sap:content-version="1">
+        <End Type="ZSUMMER_SRV.Floor" Multiplicity="1" Role="FromRole_Floor2Room" />
+        <End Type="ZSUMMER_SRV.Room" Multiplicity="*" Role="ToRole_Floor2Room" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Floor2Room">
+            <PropertyRef Name="IdFloor" />
+          </Principal>
+          <Dependent Role="ToRole_Floor2Room">
+            <PropertyRef Name="IdFloor" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Building2Floor" sap:content-version="1">
+        <End Type="ZSUMMER_SRV.Building" Multiplicity="1" Role="FromRole_Building2Floor" />
+        <End Type="ZSUMMER_SRV.Floor" Multiplicity="*" Role="ToRole_Building2Floor" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Building2Floor">
+            <PropertyRef Name="IdBuilding" />
+          </Principal>
+          <Dependent Role="ToRole_Building2Floor">
+            <PropertyRef Name="IdBuilding" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <EntityContainer Name="ZSUMMER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+        <EntitySet Name="RoomSet" EntityType="ZSUMMER_SRV.Room" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="FloorSet" EntityType="ZSUMMER_SRV.Floor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="PersonSet" EntityType="ZSUMMER_SRV.Person" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="BuildingSet" EntityType="ZSUMMER_SRV.Building" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1" />
+        <AssociationSet Name="Room2PersonSet" Association="ZSUMMER_SRV.Room2Person" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="RoomSet" Role="FromRole_Room2Person" />
+          <End EntitySet="PersonSet" Role="ToRole_Room2Person" />
+        </AssociationSet>
+        <AssociationSet Name="Floor2RoomSet" Association="ZSUMMER_SRV.Floor2Room" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="FloorSet" Role="FromRole_Floor2Room" />
+          <End EntitySet="RoomSet" Role="ToRole_Floor2Room" />
+        </AssociationSet>
+        <AssociationSet Name="Building2FloorSet" Association="ZSUMMER_SRV.Building2Floor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="BuildingSet" Role="FromRole_Building2Floor" />
+          <End EntitySet="FloorSet" Role="ToRole_Building2Floor" />
+        </AssociationSet>
+        <FunctionImport Name="RoomPlace" ReturnType="ZSUMMER_SRV.Room" EntitySet="RoomSet" m:HttpMethod="GET" sap:action-for="ZSUMMER_SRV.Room">
+          <Parameter Name="ID_ROOM" Type="Edm.String" Mode="In" />
+        </FunctionImport>
+      </EntityContainer>
+      <atom:link rel="self" href="http://54.169.86.172:8000/sap/opu/odata/SAP/ZSUMMER_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+      <atom:link rel="latest-version" href="http://54.169.86.172:8000/sap/opu/odata/SAP/ZSUMMER_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
